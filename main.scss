@@ -1,0 +1,198 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+/* variables */
+
+:root {
+  /* colors */
+  --primary-red: hsl(0, 78%, 62%);
+  --primary-cyan: hsl(180, 62%, 55%);
+  --primary-orange: hsl(34, 97%, 64%);
+  --primary-blue: hsl(212, 86%, 64%);
+  --neutral-800: hsl(234, 12%, 34%);
+  --neutral-400: hsl(229, 6%, 66%);
+  --neutral-200: hsl(0, 0%, 98%);
+
+  /* fonts */
+  --ff: "Poppins", sans-serif;
+  --fw-light: 200;
+  --fw-regular: 400;
+  --fw-bold: 600;
+
+  /* font size */
+  --fs-body: 0.9375rem;
+  --fs-step--1: 0.8125rem;
+  --fs-step-3: 1.25rem;
+  --fs-step-5: 1.5625rem;
+
+  /* spacing */
+  --spacer: 1rem;
+  --spacer-vs: 0.25rem;
+  --spacer-sm: 0.5rem;
+  --spacer-lg: 2rem;
+  --spacer-xl: 2.5rem;
+}
+
+$card-colors: (
+  red: var(--primary-red),
+  cyan: var(--primary-cyan),
+  orange: var(--primary-orange),
+  blue: var(--primary-blue),
+);
+
+/* reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  line-height: 1.2;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  line-height: 1.6;
+  font-family: var(--ff);
+  font-size: var(--fs-body);
+  color: var(--neutral-800);
+}
+
+main {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background-color: var(--neutral-200);
+}
+
+/* Utility classes */
+.flow-content > * + * {
+  margin-top: var(--flow-space, var(--spacer));
+}
+
+.flow-content--large {
+  --flow-space: 3rem;
+}
+/* general styles */
+
+.features {
+  margin: calc(var(--spacer-xl) * 3) auto;
+  &__header {
+    text-align: center;
+  }
+  &__title {
+    font-size: var(--fs-step-5);
+    font-weight: var(--fw-light);
+  }
+  &__subtitle {
+    font-size: var(--fs-step-5);
+    --flow-space: 0;
+  }
+  &__description {
+    color: var(--neutral-400);
+    max-width: 32ch;
+    margin-inline: auto;
+  }
+  &__cards {
+    display: grid;
+    gap: var(--spacer-lg);
+    grid-template-columns: 1fr;
+    margin-top: calc(var(--spacer-xl) * 2);
+  }
+  &__card {
+    position: relative;
+    border-radius: var(--spacer-sm);
+    background: #fff;
+    padding: var(--spacer-lg);
+    max-width: 19rem;
+    margin: 0 auto;
+    --flow-space: var(--spacer-vs);
+    box-shadow: 0 1rem 2rem hsla(213, 47%, 67%, 0.5);
+  }
+  &__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.5px;
+    background-color: var(--clr-accent, var(--primary-red));
+    border-radius: var(--spacer-sm) var(--spacer-sm) 0 0;
+  }
+
+  &__card-title {
+    font-size: var(--fs-step-3);
+  }
+  &__card-description {
+    color: var(--neutral-400);
+    font-size: var(--fs-step--1);
+    line-height: 2;
+  }
+  &__card-icon {
+    margin-left: auto;
+    --flow-space: var(--spacer);
+  }
+}
+
+@each $name, $color in $card-colors {
+  .features__card-#{$name}::before {
+    --clr-accent: #{$color};
+  }
+}
+
+/* media queries */
+@media screen and (min-width: 55rem) {
+  .features {
+    &__cards {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+    &__card {
+      max-width: 22rem;
+    }
+    &__card-red,
+    &__card-orange {
+      grid-column: 2 / span 1;
+      grid-row: span 2;
+      align-items: center;
+    }
+    &__card-cyan {
+      grid-row: 2 / span 2;
+    }
+    &__card-blue {
+      grid-column: 3 / span 1;
+      grid-row: 2 / span 2;
+    }
+  }
+}
