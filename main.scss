@@ -24,6 +24,7 @@
   --fs-step--1: 0.8125rem;
   --fs-step-3: 1.25rem;
   --fs-step-5: 1.5625rem;
+  --fs-step-9: 2.2rem;
 
   /* spacing */
   --spacer: 1rem;
@@ -117,6 +118,7 @@ main {
   }
   &__subtitle {
     font-size: var(--fs-step-5);
+    font-weight: var(--fw-bold);
     --flow-space: 0;
   }
   &__description {
@@ -174,6 +176,14 @@ main {
 /* media queries */
 @media screen and (min-width: 55rem) {
   .features {
+    &__title,
+    &__subtitle {
+      font-size: var(--fs-step-9);
+    }
+
+    &__description {
+      max-width: 55ch;
+    }
     &__cards {
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(4, 1fr);
